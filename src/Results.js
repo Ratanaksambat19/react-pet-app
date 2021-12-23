@@ -3,10 +3,10 @@ import Pet from "./Pet";
 const Results = ({ pets }) => {
     console.log(pets)
     return (
-        <div className='search grid gap-4 grid-cols-2 lg:grid-cols-3'>
+        <div className='search grid gap-4 grid-cols-2 lg:grid-cols-4'>
             {!pets.length ? (
-                    <div>
-                        No animal found
+                <div>
+                    No animal found
                 </div>) : (
                 pets.map((pet) => (
                     <Pet
@@ -18,8 +18,8 @@ const Results = ({ pets }) => {
                         location={`${pet.city}, ${pet.state}`}
                         id={pet.id}
                     />
-                    )))
-        }
+                )))
+            }
         </div>
     )
 }

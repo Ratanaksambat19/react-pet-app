@@ -39,29 +39,36 @@ class Details extends Component {
         const { animal, breed, city, state, description, name, images, showModal } = this.state;
 
         return (
-            <div className="details">
-                <Carousel images={images}/>
-                <h1> {name} </h1>
-                <h2> {`${animal} - ${breed} - ${city}, ${state}`}</h2>
-                <ThemeContext.Consumer>
-                    {([theme]) => (
-                        <button onClick={this.toggleModal} style={{backgroundColor: theme}}>Adopt {name}</button>
-                    )}
-                </ThemeContext.Consumer>
-                <p>{description}</p>
-                {
-                    showModal ? (
-                        <Modal>
-                            <div>
-                                <h1>Would you like to adopt {name}</h1>
-                                <div className="buttons">
-                                    <button onClick={this.adopt}> Yes </button>
-                                    <button onClick={this.toggleModal}> NO </button>
+            <div className="details grid gap-4 lg:grid-cols-2 ">
+                <Carousel className='' images={images} />
+
+                <div className="details_text relative flex flex-col justify-center p-10 bg-gradient-to-tr from-blue-300 to-transparent">
+                    <div className="header absolute w-full top-0 lg:top-20 flex justify-around items-center">
+                        <div className="title text-center bg-gradient-to-tr from-pink-300 to-transparent">
+                            <h1 className="text-xl"> {name} </h1>
+                            <h2> {`${animal} - ${breed} - ${city}, ${state}`}</h2>
+                        </div>
+                        <ThemeContext.Consumer>
+                            {([theme]) => (
+                                <button onClick={this.toggleModal} className="hover:opacity-50 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" style={{ backgroundColor: theme }}>Adopt {name}</button>
+                            )}
+                        </ThemeContext.Consumer>
+                    </div>
+                    <p className="mt-10 lg:mt-0">{description}</p>
+                    {
+                        showModal ? (
+                            <Modal>
+                                <div>
+                                    <h1>Would you like to adopt {name}</h1>
+                                    <div className="buttons">
+                                        <button onClick={this.adopt}> Yes </button>
+                                        <button onClick={this.toggleModal}> NO </button>
+                                    </div>
                                 </div>
-                            </div>
-                        </Modal>
-                    ) : null
-                }
+                            </Modal>
+                        ) : null
+                    }
+                </div>
             </div>
         )
     }
@@ -71,7 +78,7 @@ const DetailWithRouter = withRouter(Details);
 export default function DetailWithErrorBoundary() {
     return (
         <ErrorBoundary>
-            <DetailWithRouter/>
+            <DetailWithRouter />
         </ErrorBoundary>
     )
 };
